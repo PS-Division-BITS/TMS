@@ -130,11 +130,13 @@ LOGOUT_REDIRECT_URL = '/TMS/login-redirect/'
 
 
 # Email service
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'psdivisionbits@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' # mail service smtp
+EMAIL_HOST_USER = 'psdiary.bits@gmail.com' # email id
+EMAIL_HOST_PASSWORD = 'password' # password
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'PSD Team <psdiary.bits@google.com>'
 
 try:
     from .local_settings import *
