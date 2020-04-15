@@ -104,7 +104,8 @@ class PS2TSFormView(generic.FormView):
                 current_user.contact = contact
                 current_user.save()
                 form.save()
-                notify_ps2ts(request)
+                data=PS2TSTransfer.objects.filter(applicant = request.user.userprofile)[0]
+                notify_ps2ts(data, "supervisor")
                 return redirect('/TMS/student/dashboard/')
             else:
                 invalid_supervisor_email = True

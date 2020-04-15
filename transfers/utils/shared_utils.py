@@ -1,28 +1,29 @@
 # This file will contain utility functions that are not strictly related to a single user types and other places
-from transfers.constants import UserType, ApplicationsStatus, ThesisLocaleType
+from transfers.constants import UserType, ApplicationsStatus, ThesisLocaleType, TransferType
 from transfers.models import DeadlineModel, PS2TSTransfer, TS2PSTransfer
 from transfers.constants import TransferType
 from django.utils import timezone as datetime
+from transfers.utils.student_utils import notify_ps2ts
 
 
 def update_application(applicant, application_type, approved_by, status, comments):
     try:
-        if application_type == TransferType.TS2PS.value:
+        print('Hey??')
+        print(application_type)
+        if int(application_type) == TransferType.TS2PS.value:
             transfer_form = TS2PSTransfer.objects.get(applicant__user__username=applicant)
         else:
             transfer_form = PS2TSTransfer.objects.get(applicant__user__username=applicant)
         if approved_by == UserType.SUPERVISOR.value:
             transfer_form.is_supervisor_approved = int(status)
             transfer_form.comments_from_supervisor = comments
+            if int(status) == ApplicationsStatus.APPROVED.value and int(application_type) == TransferType.PS2TS.value:
+                notify_ps2ts(transfer_form,"hod")
         elif approved_by == UserType.HOD.value:
             transfer_form.is_hod_approved = int(status)
             transfer_form.comments_from_hod = comments
         elif approved_by == UserType.AD.value:
-            if application_type == TransferType.TS2PS.value:    
-                transfer_form.is_hod_approved = int(status)
-            else:
-                transfer_form.is_supervisor_approved = int(status)
-                transfer_form.is_hod_approved = int(status)
+            transfer_form.is_ad_approved = int(status)
             transfer_form.comments_from_ad = comments
         transfer_form.save()
         return True

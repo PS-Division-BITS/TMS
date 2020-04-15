@@ -39,6 +39,7 @@ urlpatterns += [
     # hod urls
     path('data/get-application-data/', redirect_views.application_data_redirect_view),
     path('data/approve-transfer-request/', redirect_views.approve_transfer_request_redirect_view),
+    path('data/export-hod/',hod_views.export_hod, name='hodExp'),
     # AD urls
     path('data/assoc-dean/get-transfer-lists/type/<type>/', assoc_dean_views.AssocDeanLisApplicationstView.as_view()),
     # psd urls

@@ -42,7 +42,16 @@
 
 
                         {{ form.contact|as_crispy_field }}
-                        {{ form.supervisor_email|as_crispy_field }}
+                        {% comment %} rewriting to override right align of label form addUser.css {% endcomment %}
+                        <div id="div_id_supervisor_email" class="control-group">
+                            <label for="id_supervisor_email" class="control-label requiredField text-left">
+                                Supervisor (on campus) / co-supervisor (off campus) Email<span class="asteriskField">*</span>
+                            </label>
+                            <div class="controls">
+                                <input type="email" name="supervisor_email" maxlength="254" class="emailinput" required="" id="id_supervisor_email">
+                            </div>
+                        </div>
+
                         <div class="row control-group" style="padding: 0 30px 15px 30px;">
                             <div class="col-12">
                                 <div class="row text-center">

@@ -55,7 +55,7 @@
     </div>
 
 
-    <div class="py-2" style="background: #266793">
+    <div class="py-0" style="background: #266793">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-9 d-lg-block">          
@@ -71,11 +71,11 @@
         </div>
       </div>
     </div>
-    <header class="site-navbar py-3 js-sticky-header site-navbar-target border-bottom border-medium" role="banner" style="background: #E3E3E3">
+    <header class="site-navbar py-1 js-sticky-header site-navbar-target border-bottom border-medium" role="banner" style="background: #E3E3E3">
 
       <div class="container">
         <div class="d-flex align-items-center">
-          <div class="site-logo mr-auto pr-2">
+          <div class="site-logo mr-auto pr-2 mt-1">
             <a href="/TMS/login-redirect/" class="d-block">
               <img src="{% static 'transfers/images/logo.png' %}" alt="Image" class="img-fluid">
             </a>
@@ -111,11 +111,14 @@
       <br>
       <div class="site-navbar py-0  site-navbar-target border border-dark" role="banner" style="background: #B8D0E1">
         <center>
-          <div class="text-danger font-weight-bold" style="font-size: 20px;" id="website_base_deadline1">
-            <!-- <p type="abc" name="website_base_deadline" id="website_base_deadline"> </p> -->
+          <div class="text-danger font-weight-bold" style="font-size: 18px;" id="website_base_deadline1">
+            
           </div>
-          <div class="text-danger font-weight-bold" style="font-size: 20px;" id="website_base_deadline2">
-            <!-- <p type="abc" name="website_base_deadline" id="website_base_deadline"> </p> -->
+          <div class="text-danger font-weight-bold" style="font-size: 18px;" id="website_base_deadline2">
+            
+          </div>
+          <div class="text-danger font-weight-bold" style="font-size: 18px;" id="website_base_message">
+            
           </div>
       </div>
     </header>  
@@ -133,7 +136,7 @@
     {% endblock %}
 <br>
   <div>
-      <center><p style="font-size: 12px">Copyright © 2019. All Rights Reserved. <a href="/transfers/dev_page">Meet the Creators.</a></p>      
+      <center><p style="font-size: 12px">Copyright © 2020. All Rights Reserved. <a href="/transfers/dev_page">Meet the Creators.</a></p>      
   </div>
 
 
@@ -157,6 +160,7 @@
     .container{
         max-width: 1400px;
     }
+    
   }
 </style>
 
@@ -175,10 +179,28 @@
     {
       var deadline_ps2ts = getDate(response.data['deadline_PS2TS']);
       var deadline_ts2ps = getDate(response.data['deadline_TS2PS']);
-      //console.log(getDate(response.data['deadline_PS2TS']));
-      document.getElementById("website_base_deadline1").innerHTML ="1. Deadline for PS to TS Transfer Application - "+deadline_ps2ts;
-      document.getElementById("website_base_deadline2").innerHTML ="2. Deadline for TS to PS Transfer Application - "+deadline_ts2ps;
-    }
+      var is_active_PS2TS = response.data['is_active_PS2TS'];
+      var is_active_TS2PS = response.data['is_active_TS2PS'];
+      var message = response.data['message'];
+      //console.log(message);
+      if (is_active_PS2TS) 
+      {
+        document.getElementById("website_base_deadline1").innerHTML ="1. Deadline for PS to TS Transfer Application - "+deadline_ps2ts;
+      }
+      else
+      {
+        document.getElementById("website_base_deadline1").innerHTML ="1. PS to TS Transfer Application Form is Disabled";
+      }
+      if (is_active_TS2PS) 
+      {
+        document.getElementById("website_base_deadline2").innerHTML ="2. Deadline for TS to PS Transfer Application - "+deadline_ts2ps;
+      } 
+      else
+      {
+        document.getElementById("website_base_deadline2").innerHTML ="2. TS to PS Transfer Application Form is Disabled";        
+      }
+      document.getElementById("website_base_message").innerHTML =message;
+      }
   });
   
  </script>

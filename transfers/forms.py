@@ -8,7 +8,8 @@ class PS2TSTransferForm(forms.ModelForm):
         model = PS2TSTransfer  
         fields = ['contact', 'applicant', 'supervisor_email', 'hod_email', 'sub_type', 'cgpa', 'thesis_locale', 'thesis_subject', 'name_of_org', 'expected_deliverables']
         labels = {
-            "supervisor_email": "Supervisor/co-supervisor Email",
+            "supervisor_email": "Supervisor(on campus)/co-supervisor(off campus) Email",
+            "thesis_locale": "Thesis type",
             "hod_email": "HOD Email",
             "cgpa": "CGPA",
             "name_of_org": "Name of Institute/Organization"

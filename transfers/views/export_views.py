@@ -10,7 +10,7 @@ from transfers.forms import PS2TSTransferForm, TS2PSTransferForm
 
 from transfers.utils import get_application_status, notify_ps2ts, notify_ts2ps, get_deadline_status
 from transfers.tools.populate import populate
-from transfers.tools.export import getFile
+from transfers.tools.export import *
 
 def exp(request):
 	if request.method=='GET':
@@ -18,5 +18,7 @@ def exp(request):
 	if request.method=='POST':
 		if request.user.is_superuser:
 			print(request.POST['type'])
-			getFile(request, int(request.POST['type']))
-	return HttpResponse("Done")
+			response=getFile(request, int(request.POST['type']))
+		else:
+			response=HttpResponse("You don't have acces to this page")
+	return response

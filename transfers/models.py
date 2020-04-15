@@ -93,6 +93,10 @@ class PS2TSTransfer(models.Model):
         default=ApplicationsStatus.PENDING.value,
         choices=status_choices
     )
+    is_ad_approved = models.IntegerField(
+        default=ApplicationsStatus.PENDING.value,
+        choices=status_choices
+    )
     # comments from authorities
     comments_from_supervisor = models.TextField(null=True, blank=True)
     comments_from_hod = models.TextField(null=True, blank=True)
@@ -137,6 +141,10 @@ class TS2PSTransfer(models.Model):
             help_text='Name of BITS Campus or Organization where thesis was being carried')
     # field to note the status of the application
     is_hod_approved = models.IntegerField(
+        default=ApplicationsStatus.PENDING.value,
+        choices=status_choices
+    )
+    is_ad_approved = models.IntegerField(
         default=ApplicationsStatus.PENDING.value,
         choices=status_choices
     )

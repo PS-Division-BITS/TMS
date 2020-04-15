@@ -11,10 +11,13 @@
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
 
+    <!-- Popper Js-->
+   <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+
     <!-- Bootstrap CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+    
 
     <!-- Vue CDN -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -64,6 +67,7 @@
           PS TO TS Transfer Portal
         </h3>
 
+    
         <div v-if="isHOD" class="text-center  ">
           <h3>Select Transfer Type</h3>
           {% comment %} <button class="btn btn-outline-danger" @click="application_type=0, getData();"> PS to TS</button>
@@ -73,8 +77,36 @@
               <input class="switch-input" v-model="applicationTypeBoolean" type="checkbox" />
               <span class="switch-label"  data-on="PS to TS Transfers" data-off="TS to PS Transfers"></span> 
               <span class="switch-handle"></span> 
+         
+
           </label>
+         </div>
+        <div class="row d-flex  justify-content-between container-fluid">
+         <div class="text-left border botder-primary p-2 m-2">
+          Total Applications Pending &nbsp; :   ${data_pending.length}  <br>
+          Total Applications Approved :   ${data_approved.length}
+         </div>
+         <div  v-if="isHOD" class="m-1 ml-2 text-right">
+
+                 <a class="btn btn-success dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Export Data
+                   
+                  </a>
+
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <button class="dropdown-item" @click="exportData(1)" >PS to TS Transfers</button>
+                    <button class="dropdown-item" @click="exportData(2)">TS to PS Transfers</button>
+                
+                  </div>
         </div>
+        </div>
+        
+         
+
+
+      
+
 
         <hr>
         
@@ -87,12 +119,12 @@
               <span class="switch-label"  data-on="Forwarded" data-off="Not-forwarded"></span> 
               <span class="switch-handle"></span> 
           </label>
+          
       </section>
      
       <div class="text-center"> <i>Click on a card to Forward/Reject a request</i></div>
-       <section id="data-section" class="row mt-3 container-fluid d-flex justify-content-around ">
-         
-       
+    
+       <section id="data-section" class="row mt-3 container-fluid d-flex justify-content-around "> 
       <!-- Pending Requests-->
        <div v-if="!showApproved" v-for="student in data_pending" id="pending-card" class="table-primary container-fluid rounded m-2 offset-1 col-md-3">
                
@@ -320,7 +352,7 @@
          {  
           
            console.log(stud,status);
-           if(confirm('Are you sure to approve '+stud.applicant__user__first_name+'\'s request'))
+           if(confirm('do you want to submit '+stud.applicant__user__first_name+'\'s request'))
            axios.get('/TMS/data/approve-transfer-request?student_username='+stud.applicant__user__username+'&status='+status+'&comments='+this.comments+'&application_type='+this.application_type)
            .then(response=>
            {
@@ -341,6 +373,33 @@
              this.getData();
              $('#applicationDetailsModal').modal('hide'); $('.modal-backdrop').remove();
            })
+         },
+         exportData(application_type){
+           this.loading=true;
+            axios.get('/TMS/data/export-hod/?type='+application_type,{responseType: 'blob', cache: 'no-cache', headers: {'content-type': 'application/vnd.ms-excel;charset=UTF-8'}})
+           .then(response =>  {
+                
+                  const url = window.URL.createObjectURL(new Blob([response.data], {type:'application/vnd.ms-excel'}));
+                  const link = document.createElement('a');
+                  
+                  link.href = url;
+                  link.setAttribute('download', 'Student Transfers.xls');
+                  document.body.appendChild(link);
+                  link.click();
+                 
+                 
+                })
+           .catch(error =>
+           {
+             
+             alert('Server Error Occured with error Code: Common@395. Contact Adminsitrator')
+           })
+           .finally(x=>
+           {
+              this.loading=false;
+              
+           })
+           
          }
        }
    })

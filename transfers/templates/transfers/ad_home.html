@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="container mt-3 table-striped text-center table-responsive shadow" style="min-height: 600px;">
+    <div class="container mt-3 table-striped text-center table-responsive shadow" style="min-height: 1000px;">
       <div v-if="!init" class="site-section">
         <span class="text-center bg-light mt-5 py-4 h3"><i>Please Select the Category of Froms From Above.</i></span>
       </div>
@@ -67,16 +67,24 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropupMenuLink">
             <a class="dropdown-item" href="#" id="AA" @click="getBranch('AA')">AA</a>
+            <a class="dropdown-item" href="#" id="AA" @click="getBranch('AB')">AB</a>
             <a class="dropdown-item" href="#" id="A1" @click="getBranch('A1')">A1</a>
+            <a class="dropdown-item" href="#" id="A1" @click="getBranch('A2')">A2</a>
             <a class="dropdown-item" href="#" id="A3" @click="getBranch('A3')">A3</a>
             <a class="dropdown-item" href="#" id="A4" @click="getBranch('A4')">A4</a>
+            <a class="dropdown-item" href="#" id="A1" @click="getBranch('A5')">A5</a>
             <a class="dropdown-item" href="#" id="A7" @click="getBranch('A7')">A7</a>
             <a class="dropdown-item" href="#" id="A8" @click="getBranch('A8')">A8</a>
+            <a class="dropdown-item" href="#" id="A1" @click="getBranch('A9')">A9</a>
             <a class="dropdown-item" href="#" id="B1" @click="getBranch('B1')">B1</a>
             <a class="dropdown-item" href="#" id="B2" @click="getBranch('B2')">B2</a>
             <a class="dropdown-item" href="#" id="B3" @click="getBranch('B3')">B3</a>
             <a class="dropdown-item" href="#" id="B4" @click="getBranch('B4')">B4</a>
             <a class="dropdown-item" href="#" id="B5" @click="getBranch('B5')">B5</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C2')">C2</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C5')">C5</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C6')">C6</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C7')">C7</a>
             <a class="dropdown-item" href="#" id="All (Default)" @click="getBranch('')">All (Default)</a>
           </div>
           <span id="branch" class="m-2 ml-4">All (Default)</span>
@@ -140,16 +148,24 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropupMenuLink">
             <a class="dropdown-item" href="#" id="AA" @click="getBranch('AA')">AA</a>
+            <a class="dropdown-item" href="#" id="AA" @click="getBranch('AB')">AB</a>
             <a class="dropdown-item" href="#" id="A1" @click="getBranch('A1')">A1</a>
+            <a class="dropdown-item" href="#" id="A1" @click="getBranch('A2')">A2</a>
             <a class="dropdown-item" href="#" id="A3" @click="getBranch('A3')">A3</a>
             <a class="dropdown-item" href="#" id="A4" @click="getBranch('A4')">A4</a>
+            <a class="dropdown-item" href="#" id="A1" @click="getBranch('A5')">A5</a>
             <a class="dropdown-item" href="#" id="A7" @click="getBranch('A7')">A7</a>
             <a class="dropdown-item" href="#" id="A8" @click="getBranch('A8')">A8</a>
+            <a class="dropdown-item" href="#" id="A1" @click="getBranch('A9')">A9</a>
             <a class="dropdown-item" href="#" id="B1" @click="getBranch('B1')">B1</a>
             <a class="dropdown-item" href="#" id="B2" @click="getBranch('B2')">B2</a>
             <a class="dropdown-item" href="#" id="B3" @click="getBranch('B3')">B3</a>
             <a class="dropdown-item" href="#" id="B4" @click="getBranch('B4')">B4</a>
             <a class="dropdown-item" href="#" id="B5" @click="getBranch('B5')">B5</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C2')">C2</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C5')">C5</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C6')">C6</a>
+            <a class="dropdown-item" href="#" id="B1" @click="getBranch('C7')">C7</a>
             <a class="dropdown-item" href="#" id="All (Default)" @click="getBranch('')">All (Default)</a>
           </div>
           <span id="branch" class="m-2 ml-4">All (Default)</span>
@@ -297,16 +313,24 @@
         data_approved_old:[], 
         data_AA_approved:[],
         data_AA_not_approved:[],
+        data_AB_approved:[],
+        data_AB_not_approved:[],
         data_A1_approved:[],
-        data_A1_not_approved:[], 
+        data_A1_not_approved:[],
+        data_A2_approved:[],
+        data_A2_not_approved:[], 
         data_A3_approved:[],
         data_A3_not_approved:[],
         data_A4_approved:[],
         data_A4_not_approved:[],
+        data_A5_approved:[],
+        data_A5_not_approved:[],
         data_A7_approved:[],
         data_A7_not_approved:[],
         data_A8_approved:[],
         data_A8_not_approved:[],      
+        data_A9_approved:[],
+        data_A9_not_approved:[],
         data_B1_approved:[],
         data_B1_not_approved:[],
         data_B2_approved:[],
@@ -317,6 +341,14 @@
         data_B4_not_approved:[],
         data_B5_approved:[],
         data_B5_not_approved:[],
+        data_C2_approved:[],
+        data_C2_not_approved:[],
+        data_C5_approved:[],
+        data_C5_not_approved:[],
+        data_C6_approved:[],
+        data_C6_not_approved:[],
+        data_C7_approved:[],
+        data_C7_not_approved:[],
        },
 
        methods:
@@ -335,11 +367,23 @@
             this.data_not_approved=this.data_AA_not_approved;
             document.getElementById("branch").textContent="AA";
           } 
+          if(str=="AB")
+          {
+            this.data_approved=this.data_AB_approved;
+            this.data_not_approved=this.data_AB_not_approved;
+            document.getElementById("branch").textContent="AB";
+          } 
           if(str=="A1")
           {
             this.data_approved=this.data_A1_approved;
             this.data_not_approved=this.data_A1_not_approved;
             document.getElementById("branch").textContent="A1";
+          } 
+          if(str=="A2")
+          {
+            this.data_approved=this.data_A2_approved;
+            this.data_not_approved=this.data_A2_not_approved;
+            document.getElementById("branch").textContent="A2";
           } 
           if(str=="A3")
           {
@@ -353,6 +397,12 @@
             this.data_not_approved=this.data_A4_not_approved;
             document.getElementById("branch").textContent="A4";
           }        
+          if(str=="A5")
+          {
+            this.data_approved=this.data_A5_approved;
+            this.data_not_approved=this.data_A5_not_approved;
+            document.getElementById("branch").textContent="A5";
+          } 
           if(str=="A7")
           {
             this.data_approved=this.data_A7_approved;
@@ -364,6 +414,12 @@
             this.data_approved=this.data_A8_approved;
             this.data_not_approved=this.data_A8_not_approved;
             document.getElementById("branch").textContent="A8";
+          } 
+          if(str=="A9")
+          {
+            this.data_approved=this.data_A9_approved;
+            this.data_not_approved=this.data_A9_not_approved;
+            document.getElementById("branch").textContent="A9";
           } 
           if(str=="B1")
           {
@@ -394,6 +450,30 @@
             this.data_approved=this.data_B5_approved;
             this.data_not_approved=this.data_B5_not_approved;
             document.getElementById("branch").textContent="B5";
+          } 
+          if(str=="C2")
+          {
+            this.data_approved=this.data_C2_approved;
+            this.data_not_approved=this.data_C2_not_approved;
+            document.getElementById("branch").textContent="C2";
+          } 
+          if(str=="C5")
+          {
+            this.data_approved=this.data_C5_approved;
+            this.data_not_approved=this.data_C5_not_approved;
+            document.getElementById("branch").textContent="C5";
+          } 
+          if(str=="C6")
+          {
+            this.data_approved=this.data_C6_approved;
+            this.data_not_approved=this.data_C6_not_approved;
+            document.getElementById("branch").textContent="C6";
+          } 
+          if(str=="C7")
+          {
+            this.data_approved=this.data_C7_approved;
+            this.data_not_approved=this.data_C7_not_approved;
+            document.getElementById("branch").textContent="C7";
           } 
 
         },
@@ -449,16 +529,24 @@
           this.data_approved_old=[]; 
           this.data_AA_approved=[];
           this.data_AA_not_approved=[];
+          this.data_AB_approved=[];
+          this.data_AB_not_approved=[];
           this.data_A1_approved=[];
           this.data_A1_not_approved=[]; 
+          this.data_A2_approved=[];
+          this.data_A2_not_approved=[];
           this.data_A3_approved=[];
           this.data_A3_not_approved=[];
           this.data_A4_approved=[];
           this.data_A4_not_approved=[];
+          this.data_A5_approved=[];
+          this.data_A5_not_approved=[];
           this.data_A7_approved=[];
           this.data_A7_not_approved=[];
           this.data_A8_approved=[];
           this.data_A8_not_approved=[];      
+          this.data_A9_approved=[];
+          this.data_A9_not_approved=[];
           this.data_B1_approved=[];
           this.data_B1_not_approved=[];
           this.data_B2_approved=[];
@@ -469,68 +557,106 @@
           this.data_B4_not_approved=[];
           this.data_B5_approved=[];
           this.data_B5_not_approved=[];
+          this.data_C2_approved=[];
+          this.data_C2_not_approved=[];
+          this.data_C5_approved=[];
+          this.data_C5_not_approved=[];
+          this.data_C6_approved=[];
+          this.data_C6_not_approved=[];
+          this.data_C7_approved=[];
+          this.data_C7_not_approved=[];
           axios.get('/TMS/data/assoc-dean/get-transfer-lists/type/'+this.type_val+'/')
           .then(response=>
           {
             this.data_all=response.data;
-            console.log(response.data[0].is_hod_approved)
-            this.data_approved=this.data_all;
-            this.data_approved_old=this.data_all;
-            //this.data_approved=response.data.data_approved;
-            //this.data_approved_old=response.data.data_approved;
-            //this.data_not_approved=response.data.data_not_approved;
-            //this.data_not_approved_old=response.data.data_not_approved;
-            //console.log(response.data[11]);
+            //console.log(response.data[0]);
+            this.data_approved=response.data[0];
+            this.data_approved_old=response.data[0];
+            this.data_not_approved=response.data[1];
+            this.data_not_approved_old=response.data[1];
+            //console.log(response.data[1]);
             for (index=0;index<this.data_approved.length; index++) 
-            {
+            { //console.log(this.data_approved[index].applicant__user__username.substring(4,6));
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="AA") 
               {
                 //console.log("here")
-                this.data_AA_approved.push(response.data[index]);
+                this.data_AA_approved.push(response.data[0][index]);
                 //console.log(this.data_A3[0].applicant__user__username)
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="AB") 
+              {                
+                this.data_AB_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="A1") 
               {                
-                this.data_A1_approved.push(response.data[index]); 
-                console.log(this.data_A1_approved[0].applicant__user__username) 
-                console.log(this.data_A1_approved) 
-                console.log(this.data_approved)           
+                this.data_A1_approved.push(response.data[0][index]); 
+                //console.log(this.data_A1_approved[0].applicant__user__username) 
+                //console.log(this.data_A1_approved) 
+                //console.log(this.data_approved)           
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="A2") 
+              {                
+                this.data_A2_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="A3") 
               {                
-                this.data_A3_approved.push(response.data[index]);               
+                this.data_A3_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="A4") 
               {                
-                this.data_A4_approved.push(response.data[index]);               
+                this.data_A4_approved.push(response.data[0][index]);               
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="A5") 
+              {                
+                this.data_A5_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="A7") 
               {                
-                this.data_A7_approved.push(response.data[index]);               
+                this.data_A7_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="A8") 
               {                
-                this.data_A8_approved.push(response.data[index]);               
+                this.data_A8_approved.push(response.data[0][index]);               
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="A9") 
+              {                
+                this.data_A9_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="B1") 
               {                
-                this.data_B1_approved.push(response.data[index]);               
+                this.data_B1_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="B2") 
               {                
-                this.data_B2_approved.push(response.data[index]);               
+                this.data_B2_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="B3") 
               {                
-                this.data_B3_approved.push(response.data[index]);               
+                this.data_B3_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="B4") 
               {                
-                this.data_B4_approved.push(response.data[index]);               
+                this.data_B4_approved.push(response.data[0][index]);               
               }
               if (this.data_approved[index].applicant__user__username.substring(4,6)=="B5") 
               {                
-                this.data_B5_approved.push(response.data[index]);               
+                this.data_B5_approved.push(response.data[0][index]);               
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="C2") 
+              {                
+                this.data_C2_approved.push(response.data[0][index]);               
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="C5") 
+              {                
+                this.data_C5_approved.push(response.data[0][index]);               
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="C6") 
+              {                
+                this.data_C6_approved.push(response.data[0][index]);               
+              }
+              if (this.data_approved[index].applicant__user__username.substring(4,6)=="C7") 
+              {                
+                this.data_C7_approved.push(response.data[0][index]);               
               }
             }
 
@@ -539,48 +665,80 @@
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="AA") 
               {
                 //console.log("here")
-                this.data_AA_not_approved.push(response.data[index]);
+                this.data_AA_not_approved.push(response.data[1][index]);
                 //console.log(this.data_A3[0].applicant__user__username)
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="AB") 
+              {                
+                this.data_AB_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A1") 
               {                
-                this.data_A1_not_approved.push(response.data[index]);               
+                this.data_A1_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A2") 
+              {                
+                this.data_A2_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A3") 
               {                
-                this.data_A3_not_approved.push(response.data[index]);               
+                this.data_A3_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A4") 
               {                
-                this.data_A4_not_approved.push(response.data[index]);               
+                this.data_A4_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A5") 
+              {                
+                this.data_A5_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A7") 
               {                
-                this.data_A7_not_approved.push(response.data[index]);               
+                this.data_A7_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A8") 
               {                
-                this.data_A8_not_approved.push(response.data[index]);               
+                this.data_A8_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="A9") 
+              {                
+                this.data_A9_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="B1") 
               {                
-                this.data_B1_not_approved.push(response.data[index]);               
+                this.data_B1_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="B2") 
               {                
-                this.data_B2_not_approved.push(response.data[index]);               
+                this.data_B2_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="B3") 
               {                
-                this.data_B3_not_approved.push(response.data[index]);               
+                this.data_B3_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="B4") 
               {                
-                this.data_B4_not_approved.push(response.data[index]);               
+                this.data_B4_not_approved.push(response.data[1][index]);               
               }
               if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="B5") 
               {                
-                this.data_B5_not_approved.push(response.data[index]);               
+                this.data_B5_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="C2") 
+              {                
+                this.data_C2_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="C5") 
+              {                
+                this.data_C5_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="C6") 
+              {                
+                this.data_C6_not_approved.push(response.data[1][index]);               
+              }
+              if (this.data_not_approved[index].applicant__user__username.substring(4,6)=="C7") 
+              {                
+                this.data_C7_not_approved.push(response.data[1][index]);               
               }
             }
           })
@@ -599,9 +757,11 @@
               if(response.error)
               {
                 document.getElementById('closeModal').click();
+                this.comments="";
               alert('Error Rejecting this request, Contact Adminstrator', response.message);}
               else{
                 document.getElementById('closeModal').click();
+                this.comments="";
                 alert('Request rejected! ',response.message);}
            })
            .catch(error =>
@@ -760,79 +920,3 @@ table
 
 
 {% endblock %}
-
-
-<!-- 
-<script type="text/javascript">    
-    
-
-    function getData(type)
-    {
-      var type_val=type;
-      //console.log(type_val);  
-      
-      $.ajax({
-        url: '/TMS/data/assoc-dean/get-transfer-lists/type/'+type_val+'/',
-        type:'GET',
-        success: function(response)
-        {
-          $('#table-body').html('');
-          $('#table-head').html('');
-          $('#heading').html('');
-          var len=response.length;
-          //console.log(len);
-          if(type_val == 0)
-          {  
-            $('#heading').html('Status of PS to TS Transfer Requests');
-            var head="<tr> <th>College ID</th><th>Name</th><th>Supervisor</th><th>HoD</th></tr>"
-            $('#table-head').html(head);
-
-          if(len==0)
-          {
-            var entry="<tr><td colspan=4> <h3>No Applications</h3></td></tr>";
-            $('#table-body').append(entry);
-          }
-
-          for(var i=0;i<len;i++)
-          {         
-            var id = response[i].applicant__user__username;
-            var name = response[i].applicant__user__first_name + response[i].applicant__user__last_name;
-            var hod = response[i].is_hod_approved;
-            var sup = response[i].is_supervisor_approved;
-            var entry="<tr data-toggle=modal data-id=1 data-target=#applicationModal><td>"+id+"</td><td>"+name+"</td><td>"+sup+"</td><td>"+hod+"</td></tr>";
-            $('#table-body').append(entry);
-          }
-
-          }
-          else if(type_val==1)
-          {
-            $('#heading').html('Status of TS to PS Transfer Requests');
-            var head="<tr> <th>College ID</th><th>Name</th><th>HoD</th></tr>"
-            $('#table-head').html(head);
-
-            if(len==0)
-            {
-              var entry="<tr><td colspan=3> <h3>No Applications</h3></td></tr>";
-              $('#table-body').append(entry);
-            }
-
-            for(var i=0;i<len;i++)
-            {         
-              var id = response[i].applicant__user__username;
-              var name = response[i].applicant__user__first_name + response[i].applicant__user__last_name;
-              var hod = response[i].is_hod_approved;
-              var entry="<tr data-toggle="+"modal"+" data-id="+id+" data-target="+"#applicationModal"+"><td>"+id+"</td><td>"+name+"</td><td>"+hod+"</td></tr>";              
-              $('#table-body').append(entry);
-            }
-          }         
-
-        }
-
-      });             
-
-    }
-
-</script>
-
-
- -->
