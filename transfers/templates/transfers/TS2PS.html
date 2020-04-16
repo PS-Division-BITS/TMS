@@ -70,6 +70,9 @@
 </div>
 
 <script>
-    $('#id_contact').val('{{contact}}')
+    var contact = '{{contact}}';
+    if(contact == "None")
+        contact = 0;
+    $('#id_contact').val(contact);
 </script>
 {% endblock %}

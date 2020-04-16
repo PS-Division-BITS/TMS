@@ -116,7 +116,10 @@
 </div>
 
 <script>
-    $('#id_contact').val('{{contact}}')
+    var contact = '{{contact}}';
+    if(contact == "None")
+        contact = 0;
+    $('#id_contact').val(contact);
     if('{{ invalid_supervisor_email }}' == 'True'){
         $("#verification-info").html("Invalid Supervisor Email!");
     }
