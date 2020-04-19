@@ -30,7 +30,10 @@ class UserProfile(models.Model):
         on_delete=models.CASCADE)
     campus = models.IntegerField(choices=campus_choices, blank=True,
         null=True)
-    contact = models.IntegerField(blank=True, null=True)
+    contact = models.CharField(
+        blank=True, null=True, max_length=10,
+        help_text="Enter 10 digit contact number"
+    )
     user_type = models.IntegerField(choices=user_choices, blank=True,
         null=True)
 
