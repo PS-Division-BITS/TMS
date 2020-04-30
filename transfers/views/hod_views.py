@@ -92,18 +92,13 @@ def get_hod_data(request):
                 'cgpa', 'thesis_locale', 'supervisor_email',
                 'thesis_subject', 'name_of_org', 'expected_deliverables',
                 'is_hod_approved', 'comments_from_supervisor',
-            ).order_by('applicant')
+            )
             # updating with supervisor details
-            supervisor_emails = PS2TSTransfer.objects.filter(
-                hod_email = current_user.email,
-                is_supervisor_approved__gt = ApplicationsStatus.PENDING.value,
-                is_hod_approved = ApplicationsStatus.PENDING.value,
-            ).values('supervisor_email',
-            ).order_by('applicant')
+            supervisor_emails = pending_applications_qs.values(
+                'supervisor_email'
+            )
             supervisor_details = []
-            print(supervisor_emails)
             for supervisor_email in list(supervisor_emails):
-                print(supervisor_email)
                 obj = User.objects.get(
                     email=supervisor_email['supervisor_email'],
                     userprofile__user_type=UserType.SUPERVISOR.value,
@@ -124,14 +119,11 @@ def get_hod_data(request):
                 'cgpa', 'thesis_locale', 'supervisor_email',
                 'thesis_subject', 'name_of_org', 'expected_deliverables',
                 'is_hod_approved', 'comments_from_supervisor',
-            ).order_by('applicant')
+            )
             # updating with supervisor wmail
-            supervisor_emails = PS2TSTransfer.objects.filter(
-                hod_email = current_user.email,
-                is_supervisor_approved__gt = ApplicationsStatus.PENDING.value,
-                is_hod_approved__gt = ApplicationsStatus.PENDING.value,
-            ).values('supervisor_email',
-            ).order_by('applicant')
+            supervisor_emails = approved_applications_qs.values(
+                'supervisor_email'
+            )
             supervisor_details = []
             for supervisor_email in supervisor_emails:
                 obj = User.objects.get(
@@ -157,7 +149,6 @@ def get_hod_data(request):
                 {'display':'Student First Name','prop':'applicant__user__first_name'},
                 {'display':'Student Last Name','prop':'applicant__user__last_name'},
                 {'display':'CGPA','prop':'cgpa'},
-                {'display':'Supervisor Name', 'prop': 'supervisor_name'},
                 {'display':'Supervisor Email', 'prop':'supervisor_email'},
                 {'display':'Thesis Location','prop':'thesis_locale_alias'},
                 {'display':'Thesis Subject','prop':'thesis_subject'},

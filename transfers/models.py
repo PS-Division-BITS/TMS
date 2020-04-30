@@ -31,7 +31,7 @@ class UserProfile(models.Model):
     campus = models.IntegerField(choices=campus_choices, blank=True,
         null=True)
     contact = models.CharField(
-        blank=True, null=True, max_length=10,
+        blank=True, null=True, max_length=20,
         help_text="Enter 10 digit contact number"
     )
     user_type = models.IntegerField(choices=user_choices, blank=True,

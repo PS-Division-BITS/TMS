@@ -42,6 +42,7 @@
 
 
                         {{ form.contact|as_crispy_field }}
+                        <p class="d-none control-group text-danger pt-0 m-0" id="contact_error">Please enter a valid mobile number</p>
                         <div id="div_id_hod_email" class="control-group">
                             <label for="id_hod_email" class="control-label requiredField">
                                 HOD Email<span class="asteriskField">*</span>
@@ -74,5 +75,8 @@
     if(contact == "None")
         contact = 0;
     $('#id_contact').val(contact);
+    var invalid_contact = '{{invalid_contact}}';
+    if(invalid_contact == "True")
+        $('#contact_error').removeClass("d-none");
 </script>
 {% endblock %}

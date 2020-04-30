@@ -4,7 +4,7 @@ nav{
 #student-details-table,#student-details-modal-table,#applicationDetailsModal,#user-details-modal-table
 {
 	font-size: small !important;
-	line-height: .6;
+	line-height: 1;
 }
 
 #userProfileModal, .form-control

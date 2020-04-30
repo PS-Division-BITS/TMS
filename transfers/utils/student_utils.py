@@ -5,6 +5,11 @@ from django.http import JsonResponse
 from transfers.models import PS2TSTransfer, TS2PSTransfer, DeadlineModel
 from django.utils import timezone as datetime
 
+import re 
+def validate_contact(value): 
+    Pattern = re.compile("(0/91)?[7-9][0-9]{9}")
+    return Pattern.match(value) 
+    
 def get_application_status(userprofile):
     status = None
     alias = None
@@ -96,7 +101,7 @@ def notify_ps2ts(data, receiver):
     "\nExpected Outcome: " + data.expected_deliverables)
     
     bottomHod="\n\nYou are kindly requested to recommend/not recommend the above student for further approval using the Transfer Management System.\n\nLink to access the Transfer Management System: http://bits-pilani.in/TMS/login/ \n\nAssociate Dean\nPractice School Division\n"
-    bottomSup="\n\nFor supervisor:\nStep 1:\n\nYour Username will be your PSRN and Password needs to be retrieved by following the below process.\n\nNote for password generation: Click on the ‘Forgot Password’ option, and then enter your registered BITS email id, you will receive instruction to set a new password.\n\nSupervisor can also update the profile by clicking “view profile “available on the right-hand side top corner.\n\nStep 2: \n\nClick the appropriate tab (PS to TS transfer) to view all the details entered by student. The form is same for both single degree and Dual Degree students (both semester Thesis). Details of students who wish to do TS with your supervision will also be available in the portal.\n\t• By clicking the student card, applicant’s details will be visible (Student ID, Student Name, CGPA, supervisor email, Thesis type, Thesis subject, Thesis location, Organization details, Expected deliverables).\n\nStep 3:\n\t• Supervisor can view all the details and has an option either to forward the request or not to forward the requests to the concerned HoD. The details of “forwarded” and “Not-forwarded” requests can be seen by clicking the toggle menu.\n\t• Hence, students seeking transfer need to mention the corresponding HoD details while filling up the form.\nAssociate Dean\nPractice School Division\n"
+    bottomSup="\n\nFor supervisor: Visit http://bits-pilani.in/TMS/login/ and proceed as follows:\nStep 1:\n\nYour Username will be your PSRN and Password needs to be retrieved by following the below process.\n\nNote for password generation: Click on the ‘Forgot Password’ option, and then enter your registered BITS email id, you will receive instruction to set a new password.\n\nSupervisor can also update the profile by clicking “view profile “available on the right-hand side top corner.\n\nStep 2: \n\nClick the appropriate tab (PS to TS transfer) to view all the details entered by student. The form is same for both single degree and Dual Degree students (both semester Thesis). Details of students who wish to do TS with your supervision will also be available in the portal.\n\t• By clicking the student card, applicant’s details will be visible (Student ID, Student Name, CGPA, supervisor email, Thesis type, Thesis subject, Thesis location, Organization details, Expected deliverables).\n\nStep 3:\n\t• Supervisor can view all the details and has an option either to forward the request or not to forward the requests to the concerned HoD. The details of “forwarded” and “Not-forwarded” requests can be seen by clicking the toggle menu.\n\t• Hence, students seeking transfer need to mention the corresponding HoD details while filling up the form.\nAssociate Dean\nPractice School Division\n"
     email=""
     if receiver=="hod":
         body=topHod+body+bottomHod
@@ -110,12 +115,15 @@ def notify_ps2ts(data, receiver):
 def notify_ts2ps(request):
     body = ""
     data=TS2PSTransfer.objects.filter(applicant = request.user.userprofile)[0]
+    topHod="Dear Sir/Madam,\n\nGreetings from Practice School Division!\n\nPlease find below the details of the student who has applied for TS to PS transfer.  The last date to submit the recommendation is April 26th, 2020.\n"
     body =  str("\nID: " + data.applicant.user.username+
     "\nName: " + data.applicant.user.first_name + " " +data.applicant.user.last_name +
     "\nTransfer Type: " + data.get_sub_type_display()+
     "\nCGPA: " + str(data.cgpa)+
     "\nReason For Transfer: " + data.reason_for_transfer+
     "\nOrganization Name: " + data.name_of_org)
+    bottomHod="\n\nYou are kindly requested to recommend/not recommend the above student for further approval using the Transfer Management System.\n\nLink to access the Transfer Management System: http://bits-pilani.in/TMS/login/ \n\nAssociate Dean\nPractice School Division\n"
+    body=topHod+body+bottomHod
     mail(str(data.hod_email),str(data.applicant.user.username),body)
 
 def mail(email, username, body):

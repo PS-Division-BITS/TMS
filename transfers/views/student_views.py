@@ -10,7 +10,7 @@ from transfers.forms import PS2TSTransferForm, TS2PSTransferForm
 from transfers.utils.student_utils import (
     get_application_status, notify_ps2ts, notify_ts2ps,
     get_branch_from_branch_code,
-    get_authority_comments
+    get_authority_comments, validate_contact
 )
 from transfers.utils.shared_utils import get_deadline_status
 import pandas as pd 
@@ -71,6 +71,7 @@ class PS2TSFormView(generic.FormView):
         form = self.form_class(initial=self.initial)
         # is supervisor email valid (present in DB)?
         invalid_supervisor_email = False
+        invalid_contact = False
         hod_file = pd.read_csv('hod_list.csv')
         hod_1 = hod_file[(hod_file["Campus"]==request.user.userprofile.campus) & ((hod_file["Department"]==request.user.username[4:6]) | (hod_file["Department"]==request.user.username[6:8]))]
         hod_email_list = hod_1['Email'].tolist()
@@ -81,7 +82,8 @@ class PS2TSFormView(generic.FormView):
             'contact': request.user.userprofile.contact,
             'form': form,
             'hod_email_list': hod_email_list,
-            'invalid_supervisor_email': invalid_supervisor_email
+            'invalid_supervisor_email': invalid_supervisor_email,
+            'invalid_contact': invalid_contact,
         }
         return render(request, self.template_name, self.context)
 
@@ -94,12 +96,15 @@ class PS2TSFormView(generic.FormView):
         form = self.form_class(request.POST)
         # is supervisor email valid (present in DB)?
         invalid_supervisor_email = False
-        if form.is_valid():
+        contact = post['contact']
+        invalid_contact = False
+        if not validate_contact(contact):
+            invalid_contact = True
+        if form.is_valid() and not invalid_contact:
             email = form.cleaned_data.get('supervisor_email')
             supervisor_email_qs = UserProfile.objects.filter(
                 user_type=UserType.SUPERVISOR.value, user__email=email)
             if supervisor_email_qs:
-                contact = form.cleaned_data.get('contact')
                 current_user = request.user.userprofile
                 current_user.contact = contact
                 current_user.save()
@@ -119,7 +124,8 @@ class PS2TSFormView(generic.FormView):
             'contact': request.user.userprofile.contact,
             'form': form,
             'hod_email_list': hod_email_list,
-            'invalid_supervisor_email': invalid_supervisor_email
+            'invalid_supervisor_email': invalid_supervisor_email,
+            'invalid_contact': invalid_contact,
         }
         return render(request, self.template_name, self.context)
         
@@ -131,6 +137,7 @@ class TS2PSFormView(generic.FormView):
     context = {}
 
     def get(self, request, *args, **kwargs):
+        invalid_contact = False
         form = self.form_class(initial=self.initial)
         hod_file = pd.read_csv('hod_list.csv')
         hod_1 = hod_file[(hod_file["Campus"]==request.user.userprofile.campus) & ((hod_file["Department"]==request.user.username[4:6]) | (hod_file["Department"]==request.user.username[6:8]))]
@@ -141,7 +148,8 @@ class TS2PSFormView(generic.FormView):
             'student_branch': get_branch_from_branch_code(request.user.username[4:6])+get_branch_from_branch_code(request.user.username[6:8]),
             'contact': request.user.userprofile.contact,
             'form': form, 
-            'hod_email_list': hod_email_list
+            'hod_email_list': hod_email_list,
+            'invalid_contact': invalid_contact,
         }
         return render(request, self.template_name, self.context)
 
@@ -152,8 +160,11 @@ class TS2PSFormView(generic.FormView):
         post['applicant'] = request.user.userprofile
         request.POST = post
         form = self.form_class(request.POST)
-        if form.is_valid():
-            contact = form.cleaned_data.get('contact')
+        contact = post['contact']
+        invalid_contact = False
+        if not validate_contact(contact):
+            invalid_contact = True
+        if form.is_valid() and not invalid_contact:
             current_user = request.user.userprofile
             current_user.contact = contact
             current_user.save()
@@ -169,7 +180,8 @@ class TS2PSFormView(generic.FormView):
             'student_branch': get_branch_from_branch_code(request.user.username[4:6])+get_branch_from_branch_code(request.user.username[6:8]),
             'contact': request.user.userprofile.contact,
             'form': form, 
-            'hod_email_list': hod_email_list
+            'hod_email_list': hod_email_list,
+            'invalid_contact': invalid_contact,
         }
         return render(request, self.template_name, self.context)
 
